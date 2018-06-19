@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String[] strings) {
             if(strings!=null) {
                 for(String weatherData : strings) {
-                    mWeatherTextView.append(weatherData + "\n\n\n");
+                    mWeatherTextView.append((weatherData) + "\n\n\n");
                 }
             }
         }
