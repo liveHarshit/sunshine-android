@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telecom.TelecomManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.liveharshit.android.sunshine.data.SunshinePreferences;
@@ -30,6 +33,24 @@ public class MainActivity extends AppCompatActivity {
 
         loadWeatherData();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.forecast,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_refresh) {
+            mWeatherTextView.setText("");
+            loadWeatherData();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void loadWeatherData() {
