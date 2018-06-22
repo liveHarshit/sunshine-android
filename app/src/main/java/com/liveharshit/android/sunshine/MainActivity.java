@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.liveharshit.android.sunshine.data.SunshinePreferences;
@@ -22,7 +24,9 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView mWeatherTextView;
+    private TextView mWeatherTextView;
+    private TextView errorTextView;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mWeatherTextView = (TextView)findViewById(R.id.tv_weather_data);
+        errorTextView = (TextView)findViewById(R.id.error_text_view);
+        progressBar = (ProgressBar)findViewById(R.id.progress_bar);
 
         loadWeatherData();
 
@@ -61,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
     public class FetchWeatherTask extends AsyncTask<String , Void, String []> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+            errorTextView.setVisibility(View.INVISIBLE);
+        }
+
+        @Override
         protected String[] doInBackground(String... strings) {
             if(strings.length==0) {
                 return null;
@@ -86,15 +99,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String[] strings) {
+            progressBar.setVisibility(View.INVISIBLE);
             if(strings!=null) {
                 for(String weatherData : strings) {
                     mWeatherTextView.append((weatherData) + "\n\n\n");
                 }
+            } else {
+                errorTextView.setVisibility(View.VISIBLE);
             }
         }
     }
-
-
-
-
 }
