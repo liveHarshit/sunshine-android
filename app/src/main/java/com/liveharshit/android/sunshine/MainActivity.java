@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.action_refresh) {
-            mWeatherTextView.setText("");
+            mForecastAdapter.setWeatherData(null);
             loadWeatherData();
             return true;
         }
@@ -110,12 +110,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String[] strings) {
+            Log.v("AsyncTask","onPostExecute");
             progressBar.setVisibility(View.INVISIBLE);
             if(strings!=null) {
-                for(String weatherData : strings) {
-                    mWeatherTextView.append((weatherData) + "\n\n\n");
+                mForecastAdapter.setWeatherData(strings);
                 }
-            } else {
+             else {
                 errorTextView.setVisibility(View.VISIBLE);
             }
         }
