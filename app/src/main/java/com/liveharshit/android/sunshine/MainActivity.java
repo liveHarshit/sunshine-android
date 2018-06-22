@@ -3,6 +3,8 @@ package com.liveharshit.android.sunshine;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.telecom.TelecomManager;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mWeatherTextView;
     private TextView errorTextView;
     private ProgressBar progressBar;
+    private RecyclerView mRecyclerView;
+    private ForecastAdapter mForecastAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         mWeatherTextView = (TextView)findViewById(R.id.tv_weather_data);
         errorTextView = (TextView)findViewById(R.id.error_text_view);
         progressBar = (ProgressBar)findViewById(R.id.progress_bar);
+        mRecyclerView = (RecyclerView)findViewById(R.id.recycle_view);
+        mForecastAdapter = new ForecastAdapter();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mForecastAdapter);
 
         loadWeatherData();
 
