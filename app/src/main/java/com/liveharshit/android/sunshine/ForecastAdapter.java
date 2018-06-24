@@ -1,18 +1,23 @@
 package com.liveharshit.android.sunshine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapterViewHolder> {
 
     private String [] mWeatherData;
+
+    private Context context;
 
     public ForecastAdapter() { }
 
@@ -23,6 +28,8 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         public ForecastAdapterViewHolder(View itemView) {
             super(itemView);
             mWeatherTextView  = (TextView)itemView.findViewById(R.id.tv_weather_data);
+            context = itemView.getContext();
+
         }
     }
 
@@ -37,10 +44,20 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
         return new ForecastAdapterViewHolder(view);    }
 
+
+
     @Override
-    public void onBindViewHolder(@NonNull ForecastAdapterViewHolder holder, int position) {
-        String weatherForThisDay = mWeatherData[position];
+    public void onBindViewHolder(@NonNull final ForecastAdapterViewHolder holder, final int position) {
+        final String weatherForThisDay = mWeatherData[position];
         holder.mWeatherTextView.setText(weatherForThisDay);
+        holder.mWeatherTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(),DetailActivity.class);
+                intent.putExtra(Intent.EXTRA_TEXT,weatherForThisDay);
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
