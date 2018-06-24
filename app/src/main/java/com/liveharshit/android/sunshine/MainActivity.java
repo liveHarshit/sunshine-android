@@ -1,5 +1,7 @@
 package com.liveharshit.android.sunshine;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,7 +69,21 @@ public class MainActivity extends AppCompatActivity {
             loadWeatherData();
             return true;
         }
+        if (id==R.id.show_map_location) {
+            openLocationInMap();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openLocationInMap() {
+        String location = SunshinePreferences.DEFAULT_MAP_LOCATION;
+        Uri geoLocation = Uri.parse("geo:0,0?q=" + location);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     private void loadWeatherData() {

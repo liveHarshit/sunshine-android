@@ -8,4 +8,10 @@
         app:showAsAction="ifRoom"
         android:orderInCategory="1">
     </item>
+
+    <item
+        android:id="@+id/show_map_location"
+        android:title="@string/map_location"
+        app:showAsAction="never">
+    </item>
 </menu>

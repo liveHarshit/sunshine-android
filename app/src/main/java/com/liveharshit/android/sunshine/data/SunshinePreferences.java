@@ -24,7 +24,7 @@ public class SunshinePreferences {
     private static final String DEFAULT_WEATHER_LOCATION = "94043,USA";
     private static final double[] DEFAULT_WEATHER_COORDINATES = {37.4284, 122.0724};
 
-    private static final String DEFAULT_MAP_LOCATION =
+    public static final String DEFAULT_MAP_LOCATION =
             "1600 Amphitheatre Parkway, Mountain View, CA 94043";
 
     /**
