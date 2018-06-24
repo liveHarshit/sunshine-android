@@ -107,5 +107,6 @@
     <string name="error_occurred">An error has occurred. Please try again by clicking REFRESH</string>
 
     <string name="map_location">Map location</string>
+    <string name="action_share">Share</string>
 
 </resources>
