@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<S
     @Override
     public void onLoadFinished(@NonNull Loader<String[]> loader, String[] strings) {
         progressBar.setVisibility(View.INVISIBLE);
+        mForecastAdapter.setWeatherData(strings);
         if (null == strings) {
             errorTextView.setVisibility(View.VISIBLE);
         } else {
