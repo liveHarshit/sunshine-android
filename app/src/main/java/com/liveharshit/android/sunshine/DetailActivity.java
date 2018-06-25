@@ -40,7 +40,6 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.share) {
-            Log.d("Share icon clicked","True");
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             intent.putExtra("sms_body", weatherOfTheDay);
